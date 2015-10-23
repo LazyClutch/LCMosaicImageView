@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ax-Wl-bXy">
+                                <rect key="frame" x="16" y="629" width="43" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="43" id="26R-Hw-BfW"/>
+                                    <constraint firstAttribute="height" constant="30" id="zTl-QH-Mbt"/>
+                                </constraints>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gHB-hi-8wf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Eq-Dm-JEe">
+                                <rect key="frame" x="328" y="629" width="34" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="aZ2-js-Hyj"/>
+                                    <constraint firstAttribute="width" constant="34" id="dXR-h4-s51"/>
+                                </constraints>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="save:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tjW-gs-9a5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbN-0h-0sB">
+                                <rect key="frame" x="163" y="629" width="49" height="30"/>
+                                <state key="normal" title="Mosaic"/>
+                                <connections>
+                                    <action selector="mosaic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AlC-43-MfT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7Eq-Dm-JEe" secondAttribute="bottom" constant="8" id="107-vF-ceH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7Eq-Dm-JEe" secondAttribute="trailing" constant="-3" id="1s1-tG-x3B"/>
+                            <constraint firstItem="9Ax-Wl-bXy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="L3i-vK-jcH"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9Ax-Wl-bXy" secondAttribute="bottom" constant="8" id="QyB-Wa-IWt"/>
+                            <constraint firstItem="EbN-0h-0sB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="e8f-pt-mp7"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EbN-0h-0sB" secondAttribute="bottom" constant="8" id="qxQ-6h-5c1"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mosaicButton" destination="EbN-0h-0sB" id="upc-aW-Hm1"/>
+                        <outlet property="resetButton" destination="9Ax-Wl-bXy" id="RBT-TO-CjE"/>
+                        <outlet property="saveButton" destination="7Eq-Dm-JEe" id="dJt-Se-VKv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="301.5" y="389.5"/>
+        </scene>
+    </scenes>
+</document>
