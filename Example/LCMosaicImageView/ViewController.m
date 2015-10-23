@@ -59,7 +59,7 @@
     
     self.imageView.mosaicEnabled = NO;
     
-    UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    //UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
@@ -84,7 +84,7 @@
 
 - (LCMosaicImageView *)imageView {
     if (!_imageView) {
-        _imageView = [[LCMosaicImageView alloc] initWithMosaicableImage:[UIImage imageNamed:@"sample.jpg"]];
+        _imageView = [[LCMosaicImageView alloc] initWithImage:[UIImage imageNamed:@"sample.jpg"]];
         _imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 60);
         _imageView.mosaicLevel = LCMosaicLevelVeryHigh;
         _imageView.delegate = self;
