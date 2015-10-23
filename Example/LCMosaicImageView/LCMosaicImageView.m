@@ -20,8 +20,8 @@
 
 @implementation LCMosaicImageView
 
-static const CGFloat kDefaultMosaicUnitWidth = 20.0f;
-static const CGFloat kDefaultMosaicUnitHeight = 20.0f;
+static const CGFloat kDefaultMosaicUnitWidth = 24.0f;
+static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
 
 #pragma mark - initializer
 
@@ -101,6 +101,7 @@ static const CGFloat kDefaultMosaicUnitHeight = 20.0f;
 }
 
 - (void)mosaicImageInPoint:(CGPoint)point {
+    point = [self transformPoint:point];
     CGFloat scalar = [UIScreen mainScreen].scale * self.mosaicImage.scale;
     
     UIImage *clipImage = [UIImage imageWithCGImage:
@@ -159,6 +160,12 @@ static const CGFloat kDefaultMosaicUnitHeight = 20.0f;
 - (void)fillImage:(UIImage *)image withColor:(UIColor *)color inContext:(CGContextRef)context atFrame:(CGRect)frame {
     [color setFill];
     CGContextFillRect(context, frame);
+}
+
+- (CGPoint)transformPoint:(CGPoint)point {
+    CGFloat x = (CGFloat)((NSInteger)point.x - (NSInteger)point.x % 2);
+    CGFloat y = (CGFloat)((NSInteger)point.y - (NSInteger)point.y % 2);
+    return CGPointMake(x, y);
 }
 
 #pragma mark - setter & getter
