@@ -84,9 +84,9 @@
 
 - (LCMosaicImageView *)imageView {
     if (!_imageView) {
-        _imageView = [[LCMosaicImageView alloc] initWithImage:[UIImage imageNamed:@"sample.jpg"]];
-        _imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 60);
-        _imageView.mosaicLevel = LCMosaicLevelVeryHigh;
+        _imageView = [[LCMosaicImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
+        _imageView.center = self.view.center;
+        _imageView.mosaicLevel = LCMosaicLevelDefault;
         _imageView.delegate = self;
     }
     return _imageView;

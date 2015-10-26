@@ -16,7 +16,7 @@
 		6360C7DB1BDA0D570075C44D /* LCMosaicImageViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6360C7DA1BDA0D570075C44D /* LCMosaicImageViewTests.m */; };
 		6360C7E61BDA0D570075C44D /* LCMosaicImageViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6360C7E51BDA0D570075C44D /* LCMosaicImageViewUITests.m */; };
 		6360C7F61BDA0D790075C44D /* LCMosaicImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6360C7F51BDA0D790075C44D /* LCMosaicImageView.m */; settings = {ASSET_TAGS = (); }; };
-		63E1E22B1BDA2A44009B6D82 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63E1E22A1BDA2A44009B6D82 /* sample.jpg */; settings = {ASSET_TAGS = (); }; };
+		63C438C61BDD066100261FFC /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C438C51BDD066100261FFC /* sample.png */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +55,7 @@
 		6360C7E71BDA0D570075C44D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6360C7F41BDA0D790075C44D /* LCMosaicImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMosaicImageView.h; sourceTree = "<group>"; };
 		6360C7F51BDA0D790075C44D /* LCMosaicImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMosaicImageView.m; sourceTree = "<group>"; };
-		63E1E22A1BDA2A44009B6D82 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
+		63C438C51BDD066100261FFC /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +123,7 @@
 		6360C7C01BDA0D570075C44D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				63E1E22A1BDA2A44009B6D82 /* sample.jpg */,
+				63C438C51BDD066100261FFC /* sample.png */,
 				6360C7C11BDA0D570075C44D /* main.m */,
 			);
 			name = "Supporting Files";
@@ -262,7 +262,7 @@
 				6360C7D01BDA0D570075C44D /* LaunchScreen.storyboard in Resources */,
 				6360C7CD1BDA0D570075C44D /* Assets.xcassets in Resources */,
 				6360C7CB1BDA0D570075C44D /* Main.storyboard in Resources */,
-				63E1E22B1BDA2A44009B6D82 /* sample.jpg in Resources */,
+				63C438C61BDD066100261FFC /* sample.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

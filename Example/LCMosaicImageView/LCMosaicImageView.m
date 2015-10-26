@@ -43,10 +43,10 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
 - (UIImage *)mosaicImageAtLevel:(LCMosaicLevel)level {
     self.mosaicLevel = level;
     
-    CGImageRef imageRef = CGImageCreateWithImageInRect([self.compressedImage CGImage],
+    CGImageRef imageRef = CGImageCreateWithImageInRect([self.originalImage CGImage],
                             CGRectMake(0, 0,
                                 self.originalImage.size.width, self.originalImage.size.height));
-    UIImage * newImage = [UIImage imageWithCGImage:imageRef scale:1.0f orientation:self.image.imageOrientation];
+    UIImage * newImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:self.image.imageOrientation];
     UIImage *mosaicImage = [self mosaicImage:newImage inLevel:level];
     CGImageRelease(imageRef);
     return mosaicImage;
@@ -102,15 +102,15 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
 
 - (void)mosaicImageInPoint:(CGPoint)point {
     point = [self transformPoint:point];
-    CGFloat scalar = [UIScreen mainScreen].scale * self.mosaicImage.scale;
+    CGFloat scalar = [UIScreen mainScreen].scale;
+    CGRect clipArea = CGRectMake((point.x - kDefaultMosaicUnitWidth / 2.0f) * scalar,
+                                 (point.y - kDefaultMosaicUnitHeight / 2.0f) * scalar,
+                                 kDefaultMosaicUnitWidth * scalar,
+                                 kDefaultMosaicUnitHeight * scalar);
     
     UIImage *clipImage = [UIImage imageWithCGImage:
-                          CGImageCreateWithImageInRect([self.mosaicImage CGImage],
-                                CGRectMake((point.x - kDefaultMosaicUnitWidth / 2.0f) * scalar,
-                                           (point.y - kDefaultMosaicUnitHeight / 2.0f) * scalar,
-                                            kDefaultMosaicUnitWidth * scalar,
-                                            kDefaultMosaicUnitHeight * scalar))
-                                    scale:1.0f
+                          CGImageCreateWithImageInRect([self.mosaicImage CGImage],clipArea)
+                                    scale:self.originalImage.scale
                                     orientation:self.mosaicImage.imageOrientation];
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:clipImage];
@@ -134,6 +134,7 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
     CGColorSpaceRelease(colorSpace);
     
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
+    
     CGContextRelease(context);
     
     CGSize imageSize = image.size;
