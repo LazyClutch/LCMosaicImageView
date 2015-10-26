@@ -44,6 +44,10 @@ You can either use Cocoapods, adding `pod 'LCMosaicImageView'` in your podfile, 
 		LCMosaicImageView *imageView = [[LCMosaicImageView alloc] initWithImage:YOUR_IMAGE];
 		[self.view addSubview:imageView];
 
+- Switch on to enable paint event of `imageView`
+
+		imageView.mosaicEnabled = YES;
+
 - (**optional**)Set mosaic level. If you don't do that, the level will be set to `LCMosaicLevelDefault`
 
 		imageView.mosaicLevel = LCMosaicLevelHigh;
