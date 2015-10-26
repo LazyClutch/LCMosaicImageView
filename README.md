@@ -65,7 +65,7 @@ You can either use Cocoapods, adding `pod 'LCMosaicImageView'` in your podfile, 
 
 # Requirement
 
-- iOS 6.0
+- iOS 6.0+
 
 # License
 
