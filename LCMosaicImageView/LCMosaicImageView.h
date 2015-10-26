@@ -34,8 +34,13 @@ typedef NS_ENUM(NSInteger, LCMosaicLevel) {
 
 - (instancetype)initWithImage:(UIImage *)image;
 
-- (void)resetImage;
+- (void)reset;
+
+- (UIImage *)mosaicImage;
 - (UIImage *)mosaicImageAtLevel:(LCMosaicLevel)level;
+
++ (UIImage *)mosaicImage:(UIImage *)image;
++ (UIImage *)mosaicImage:(UIImage *)image atLevel:(LCMosaicLevel)level;
 
 @property (nonatomic, assign, getter=isMosaicEnabled) BOOL mosaicEnabled;
 @property (nonatomic, assign) LCMosaicLevel mosaicLevel;

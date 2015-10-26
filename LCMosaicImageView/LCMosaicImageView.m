@@ -35,9 +35,14 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
 }
 
 #pragma mark - api
+#pragma mark - instance method
 
-- (void)resetImage {
+- (void)reset {
     self.image = self.originalImage;
+}
+
+- (UIImage *)mosaicImage {
+    return [self mosaicImageAtLevel:LCMosaicLevelDefault];
 }
 
 - (UIImage *)mosaicImageAtLevel:(LCMosaicLevel)level {
@@ -50,6 +55,17 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
     UIImage *mosaicImage = [self mosaicImage:newImage inLevel:level];
     CGImageRelease(imageRef);
     return mosaicImage;
+}
+
+#pragma mark - class method
+
++ (UIImage *)mosaicImage:(UIImage *)image {
+    return [LCMosaicImageView mosaicImage:image atLevel:LCMosaicLevelDefault];
+}
+
++ (UIImage *)mosaicImage:(UIImage *)image atLevel:(LCMosaicLevel)level {
+    LCMosaicImageView *imageView = [[LCMosaicImageView alloc] initWithImage:image];
+    return [imageView mosaicImageAtLevel:level];
 }
 
 #pragma mark - event handler
