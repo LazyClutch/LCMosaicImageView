@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UIButton *mosaicButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIButton *oneClickButton;
 
 @property (nonatomic, strong) LCMosaicImageView *imageView;
 
@@ -42,12 +43,14 @@
 - (IBAction)reset:(id)sender {
     [self.imageView resetImage];
     self.resetButton.hidden = YES;
+    self.oneClickButton.hidden = NO;
 }
 
 - (IBAction)mosaic:(id)sender {
     self.mosaicButton.hidden = YES;
     self.resetButton.hidden = YES;
     self.saveButton.hidden = NO;
+    self.oneClickButton.hidden = YES;
     
     self.imageView.mosaicEnabled = YES;
 }
@@ -56,10 +59,23 @@
     self.saveButton.hidden = YES;
     self.resetButton.hidden = YES;
     self.mosaicButton.hidden = NO;
+    self.oneClickButton.hidden = NO;
     
     self.imageView.mosaicEnabled = NO;
     
-    //UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (IBAction)oneClick:(id)sender {
+    self.mosaicButton.hidden = YES;
+    self.oneClickButton.hidden = YES;
+    self.resetButton.hidden = NO;
+    self.saveButton.hidden = NO;
+    
+    self.imageView.mosaicEnabled = YES;
+
+    UIImage *image = [self.imageView mosaicImageAtLevel:LCMosaicLevelDefault];
+    self.imageView.image = image;
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{

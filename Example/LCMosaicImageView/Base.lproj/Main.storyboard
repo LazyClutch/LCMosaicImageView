@@ -47,6 +47,16 @@
                                     <action selector="mosaic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AlC-43-MfT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5b7-D9-EAW">
+                                <rect key="frame" x="151" y="569" width="71" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="71" id="hvY-tr-ESw"/>
+                                </constraints>
+                                <state key="normal" title="One Click!"/>
+                                <connections>
+                                    <action selector="oneClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="34w-fv-LgB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -55,12 +65,15 @@
                             <constraint firstItem="9Ax-Wl-bXy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="L3i-vK-jcH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9Ax-Wl-bXy" secondAttribute="bottom" constant="8" id="QyB-Wa-IWt"/>
                             <constraint firstItem="EbN-0h-0sB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="e8f-pt-mp7"/>
+                            <constraint firstItem="5b7-D9-EAW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-1" id="g0w-pB-0tr"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EbN-0h-0sB" secondAttribute="bottom" constant="8" id="qxQ-6h-5c1"/>
+                            <constraint firstItem="EbN-0h-0sB" firstAttribute="top" secondItem="5b7-D9-EAW" secondAttribute="bottom" constant="30" id="qyH-4I-G6u"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="mosaicButton" destination="EbN-0h-0sB" id="upc-aW-Hm1"/>
+                        <outlet property="oneClickButton" destination="5b7-D9-EAW" id="t8I-si-iGI"/>
                         <outlet property="resetButton" destination="9Ax-Wl-bXy" id="RBT-TO-CjE"/>
                         <outlet property="saveButton" destination="7Eq-Dm-JEe" id="dJt-Se-VKv"/>
                     </connections>
