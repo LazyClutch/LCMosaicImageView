@@ -11,8 +11,8 @@
 @class LCMosaicImageView;
 
 typedef NS_ENUM(NSInteger, LCMosaicLevel) {
-    LCMosaicLevelLow = 4,
-    LCMosaicLevelMedium = 8,
+    LCMosaicLevelLow = 3,
+    LCMosaicLevelMedium = 7,
     LCMosaicLevelDefault = 10,
     LCMosaicLevelHigh = 15,
     LCMosaicLevelVeryHigh = 20

@@ -184,6 +184,12 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
     }
 }
 
+- (void)setImage:(UIImage *)image {
+    [super setImage:image];
+    _mosaicLevel = (_mosaicLevel != 0) ? _mosaicLevel : LCMosaicLevelDefault;
+    _originalImage = (_originalImage) ? _originalImage : image;
+}
+
 - (UIPanGestureRecognizer *)pan {
     if (!_pan) {
         _pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
