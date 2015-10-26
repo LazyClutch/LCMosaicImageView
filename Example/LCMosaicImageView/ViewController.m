@@ -41,7 +41,7 @@
 #pragma mark - event handler
 
 - (IBAction)reset:(id)sender {
-    [self.imageView resetImage];
+    [self.imageView reset];
     self.resetButton.hidden = YES;
     self.oneClickButton.hidden = NO;
 }
@@ -102,7 +102,7 @@
     if (!_imageView) {
         _imageView = [[LCMosaicImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
         _imageView.center = self.view.center;
-        _imageView.mosaicLevel = LCMosaicLevelLow;
+        _imageView.mosaicLevel = LCMosaicLevelDefault;
         _imageView.delegate = self;
     }
     return _imageView;
