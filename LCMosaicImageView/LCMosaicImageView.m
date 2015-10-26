@@ -11,14 +11,17 @@
 @interface LCMosaicImageView ()
 
 @property (nonatomic, strong) UIImage *originalImage;
+@property (nonatomic, strong) UIImage *compressedImage;
+@property (nonatomic, strong) UIImage *mosaicImage;
+
 @property (nonatomic, strong) UIPanGestureRecognizer *pan;
 
 @end
 
 @implementation LCMosaicImageView
 
-static const CGFloat kDefaultMosaicUnitWidth = 12.0f;
-static const CGFloat kDefaultMosaicUnitHeight = 12.0f;
+static const CGFloat kDefaultMosaicUnitWidth = 24.0f;
+static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
 
 #pragma mark - initializer
 
@@ -31,16 +34,22 @@ static const CGFloat kDefaultMosaicUnitHeight = 12.0f;
     return self;
 }
 
-- (instancetype)initWithMosaicableImage:(UIImage *)image {
-    self = [self initWithImage:image];
-    self.mosaicEnabled = YES;
-    return self;
-}
-
 #pragma mark - api
 
 - (void)resetImage {
     self.image = self.originalImage;
+}
+
+- (UIImage *)mosaicImageAtLevel:(LCMosaicLevel)level {
+    self.mosaicLevel = level;
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect([self.originalImage CGImage],
+                            CGRectMake(0, 0,
+                                self.originalImage.size.width, self.originalImage.size.height));
+    UIImage * newImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:self.image.imageOrientation];
+    UIImage *mosaicImage = [self mosaicImage:newImage inLevel:level];
+    CGImageRelease(imageRef);
+    return mosaicImage;
 }
 
 #pragma mark - event handler
@@ -71,7 +80,16 @@ static const CGFloat kDefaultMosaicUnitHeight = 12.0f;
 
 #pragma mark - private
 
+- (void)setup {
+    self.compressedImage = [self captureScreen];
+    self.mosaicImage = [self mosaicImageAtLevel:self.mosaicLevel];
+}
+
 - (void)saveImage {
+    self.image = [self captureScreen];
+}
+
+- (UIImage *)captureScreen {
     UIImage* image = nil;
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.frame.size.width, self.frame.size.height), self.opaque, 0.0);
     [self.layer renderInContext: UIGraphicsGetCurrentContext()];
@@ -79,21 +97,25 @@ static const CGFloat kDefaultMosaicUnitHeight = 12.0f;
     UIGraphicsEndImageContext();
     
     [[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    self.image = image;
+    return image;
 }
 
 - (void)mosaicImageInPoint:(CGPoint)point {
-    CGFloat scalar = [[UIScreen mainScreen] scale];
-    CGImageRef imageRef = CGImageCreateWithImageInRect([self.image CGImage],
-                                CGRectMake((point.x - kDefaultMosaicUnitWidth / 2.0f) * scalar,
-                                           (point.y - kDefaultMosaicUnitHeight / 2.0f) * scalar,
-                                           kDefaultMosaicUnitWidth * scalar,
-                                           kDefaultMosaicUnitHeight * scalar));
-    UIImage * newImage = [UIImage imageWithCGImage:imageRef scale:self.image.scale orientation:self.image.imageOrientation];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[self mosaicImage:newImage inLevel:self.mosaicLevel]];
+    point = [self transformPoint:point];
+    CGFloat scalar = [UIScreen mainScreen].scale;
+    CGRect clipArea = CGRectMake((point.x - kDefaultMosaicUnitWidth / 2.0f) * scalar,
+                                 (point.y - kDefaultMosaicUnitHeight / 2.0f) * scalar,
+                                 kDefaultMosaicUnitWidth * scalar,
+                                 kDefaultMosaicUnitHeight * scalar);
+    
+    UIImage *clipImage = [UIImage imageWithCGImage:
+                          CGImageCreateWithImageInRect([self.mosaicImage CGImage],clipArea)
+                                    scale:self.originalImage.scale
+                                    orientation:self.mosaicImage.imageOrientation];
+
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:clipImage];
     imageView.frame = CGRectMake(0, 0, kDefaultMosaicUnitWidth, kDefaultMosaicUnitHeight);
     imageView.center = point;
-    CGImageRelease(imageRef);
     [self addSubview:imageView];
 }
 
@@ -112,6 +134,7 @@ static const CGFloat kDefaultMosaicUnitHeight = 12.0f;
     CGColorSpaceRelease(colorSpace);
     
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
+    
     CGContextRelease(context);
     
     CGSize imageSize = image.size;
@@ -140,6 +163,12 @@ static const CGFloat kDefaultMosaicUnitHeight = 12.0f;
     CGContextFillRect(context, frame);
 }
 
+- (CGPoint)transformPoint:(CGPoint)point {
+    CGFloat x = (CGFloat)((NSInteger)point.x - (NSInteger)point.x % 2);
+    CGFloat y = (CGFloat)((NSInteger)point.y - (NSInteger)point.y % 2);
+    return CGPointMake(x, y);
+}
+
 #pragma mark - setter & getter
 
 - (void)setMosaicEnabled:(BOOL)mosaicEnabled {
@@ -148,10 +177,17 @@ static const CGFloat kDefaultMosaicUnitHeight = 12.0f;
     if (mosaicEnabled) {
         self.userInteractionEnabled = YES;
         [self addGestureRecognizer:self.pan];
+        [self setup];
     } else {
         self.userInteractionEnabled = NO;
         [self removeGestureRecognizer:self.pan];
     }
+}
+
+- (void)setImage:(UIImage *)image {
+    [super setImage:image];
+    _mosaicLevel = (_mosaicLevel != 0) ? _mosaicLevel : LCMosaicLevelDefault;
+    _originalImage = (_originalImage) ? _originalImage : image;
 }
 
 - (UIPanGestureRecognizer *)pan {

@@ -11,11 +11,11 @@
 @class LCMosaicImageView;
 
 typedef NS_ENUM(NSInteger, LCMosaicLevel) {
-    LCMosaicLevelLow = 1,
-    LCMosaicLevelMedium = 3,
-    LCMosaicLevelDefault = 5,
-    LCMosaicLevelHigh = 8,
-    LCMosaicLevelVeryHigh = 10
+    LCMosaicLevelLow = 3,
+    LCMosaicLevelMedium = 7,
+    LCMosaicLevelDefault = 10,
+    LCMosaicLevelHigh = 15,
+    LCMosaicLevelVeryHigh = 20
 };
 
 
@@ -32,10 +32,10 @@ typedef NS_ENUM(NSInteger, LCMosaicLevel) {
 
 @interface LCMosaicImageView : UIImageView
 
-- (void)resetImage;
-
 - (instancetype)initWithImage:(UIImage *)image;
-- (instancetype)initWithMosaicableImage:(UIImage *)image;
+
+- (void)resetImage;
+- (UIImage *)mosaicImageAtLevel:(LCMosaicLevel)level;
 
 @property (nonatomic, assign, getter=isMosaicEnabled) BOOL mosaicEnabled;
 @property (nonatomic, assign) LCMosaicLevel mosaicLevel;
