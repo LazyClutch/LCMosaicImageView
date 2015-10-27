@@ -59,7 +59,7 @@ You can either use Cocoapods, adding `pod 'LCMosaicImageView'` in your podfile, 
 
 - (**optional**)Set stroke scale. A more stroke effect means that you will get a larger area for one stroke. If you don't do that, the level will be set to `LCStrokeScaleDefault`
 
-		imageView.mosaicLevel = LCMosaicLevelHigh;
+		imageView.strokeScale = LCStrokeScaleLarge;
 
 - (**optional**)Set delegate, you can set delegate to detect mosaic event.
 	
