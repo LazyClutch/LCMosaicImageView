@@ -18,6 +18,14 @@ typedef NS_ENUM(NSInteger, LCMosaicLevel) {
     LCMosaicLevelVeryHigh = 20
 };
 
+typedef NS_ENUM(NSInteger, LCStrokeScale) {
+    LCStrokeScaleTiny = 8,
+    LCStrokeScaleSmall = 14,
+    LCStrokeScaleMedium = 20,
+    LCStrokeScaleDefault = 25,
+    LCStrokeScaleLarge = 32,
+    LCStrokeScaleVeryLarge = 40
+};
 
 @protocol LCMosaicImageViewDelegate <NSObject>
 
@@ -103,6 +111,11 @@ typedef NS_ENUM(NSInteger, LCMosaicLevel) {
  *  You can refer to the project page https://github.com/LazyClutch/LCMosaicImageView to see different kind of mosaic effect. A more mosaic level means that the image will get more blurred.
  */
 @property (nonatomic, assign) LCMosaicLevel mosaicLevel;
+
+/**
+ *  You can refer to the project page to see different kind of stroke scale effect. A more stroke effect means that you will get a larger area for one stroke.
+ */
+@property (nonatomic, assign) LCStrokeScale strokeScale;
 
 @property (nonatomic, weak) id<LCMosaicImageViewDelegate> delegate;
 

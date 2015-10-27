@@ -20,8 +20,6 @@
 
 @implementation LCMosaicImageView
 
-static const CGFloat kDefaultMosaicUnitWidth = 24.0f;
-static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
 
 #pragma mark - initializer
 
@@ -30,6 +28,7 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
     if (self) {
         _originalImage = image;
         _mosaicLevel = LCMosaicLevelDefault;
+        _strokeScale = LCStrokeScaleDefault;
     }
     return self;
 }
@@ -119,10 +118,10 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
 - (void)mosaicImageInPoint:(CGPoint)point {
     point = [self transformPoint:point];
     CGFloat scalar = [UIScreen mainScreen].scale;
-    CGRect clipArea = CGRectMake((point.x - kDefaultMosaicUnitWidth / 2.0f) * scalar,
-                                 (point.y - kDefaultMosaicUnitHeight / 2.0f) * scalar,
-                                 kDefaultMosaicUnitWidth * scalar,
-                                 kDefaultMosaicUnitHeight * scalar);
+    CGRect clipArea = CGRectMake((point.x - (double)self.strokeScale / 2.0f) * scalar,
+                                 (point.y - (double)self.strokeScale / 2.0f) * scalar,
+                                 (double)self.strokeScale * scalar,
+                                 (double)self.strokeScale * scalar);
     
     UIImage *clipImage = [UIImage imageWithCGImage:
                           CGImageCreateWithImageInRect([self.mosaicImage CGImage],clipArea)
@@ -130,7 +129,7 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
                                     orientation:self.mosaicImage.imageOrientation];
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:clipImage];
-    imageView.frame = CGRectMake(0, 0, kDefaultMosaicUnitWidth, kDefaultMosaicUnitHeight);
+    imageView.frame = CGRectMake(0, 0, (double)self.strokeScale, (double)self.strokeScale);
     imageView.center = point;
     [self addSubview:imageView];
 }
@@ -203,6 +202,7 @@ static const CGFloat kDefaultMosaicUnitHeight = 24.0f;
 - (void)setImage:(UIImage *)image {
     [super setImage:image];
     _mosaicLevel = (_mosaicLevel != 0) ? _mosaicLevel : LCMosaicLevelDefault;
+    _strokeScale = (_strokeScale != 0) ? _strokeScale : LCStrokeScaleDefault;
     _originalImage = (_originalImage) ? _originalImage : image;
 }
 
