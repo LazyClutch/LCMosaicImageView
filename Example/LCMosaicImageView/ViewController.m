@@ -102,6 +102,7 @@
     if (!_imageView) {
         _imageView = [[LCMosaicImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
         _imageView.center = self.view.center;
+        _imageView.strokeScale = LCStrokeScaleLarge;
         _imageView.delegate = self;
     }
     return _imageView;

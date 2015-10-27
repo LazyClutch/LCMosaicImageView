@@ -6,7 +6,8 @@ LCMosaicImageView is an image view which enables you to add mosaic effect on ima
 - Paint on the image for partial mosaic effects.
 - Built-in API to get a whole mosaic image.
 - Easy to reset.
-- You can set different mosaic level for different mosaic effects.
+- Different mosaic levels for different mosaic effects.
+- Different stroke scales for different painting area.
 - Easy to use, both for iPhone and iPad.
 
 # Overview
@@ -27,13 +28,17 @@ LCMosaicImageView is an image view which enables you to add mosaic effect on ima
 
 <img src="http://7xl7ci.com1.z0.glb.clouddn.com/lcmosaicview_level.gif" alt="level" title="level" />
 
+#### Different stroke scale
+
+<img src="http://7xl7ci.com1.z0.glb.clouddn.com/lcmosaicview_stroke.gif" alt="scale" title="scale" />
+
 # Get Started
 
 ### Installation
 
 You can either use Cocoapods, adding `pod 'LCMosaicImageView'` in your podfile, or directly add `LCMosaicImageView.h` and `LCMosaicImageView.m` to your project.
 
-## Usage
+### Usage
 
 - Import header file
 
@@ -48,7 +53,11 @@ You can either use Cocoapods, adding `pod 'LCMosaicImageView'` in your podfile, 
 
 		imageView.mosaicEnabled = YES;
 
-- (**optional**)Set mosaic level. If you don't do that, the level will be set to `LCMosaicLevelDefault`
+- (**optional**)Set mosaic level. A more mosaic level means that the image will get more blurred. If you don't do that, the level will be set to `LCMosaicLevelDefault`
+
+		imageView.mosaicLevel = LCMosaicLevelHigh;
+
+- (**optional**)Set stroke scale. A more stroke effect means that you will get a larger area for one stroke. If you don't do that, the level will be set to `LCStrokeScaleDefault`
 
 		imageView.mosaicLevel = LCMosaicLevelHigh;
 

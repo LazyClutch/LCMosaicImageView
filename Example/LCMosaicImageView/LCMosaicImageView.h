@@ -19,12 +19,12 @@ typedef NS_ENUM(NSInteger, LCMosaicLevel) {
 };
 
 typedef NS_ENUM(NSInteger, LCStrokeScale) {
-    LCStrokeScaleTiny = 12,
-    LCStrokeScaleSmall = 18,
-    LCStrokeScaleMeduim = 24,
-    LCStrokeScaleDefault = 30,
-    LCStrokeScaleLarge = 36,
-    LCStrokeScaleVeryLarge = 42
+    LCStrokeScaleTiny = 8,
+    LCStrokeScaleSmall = 14,
+    LCStrokeScaleMedium = 20,
+    LCStrokeScaleDefault = 25,
+    LCStrokeScaleLarge = 32,
+    LCStrokeScaleVeryLarge = 40
 };
 
 @protocol LCMosaicImageViewDelegate <NSObject>
