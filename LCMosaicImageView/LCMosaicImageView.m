@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) UIImage *originalImage;
 @property (nonatomic, strong) UIImage *compressedImage;
-@property (nonatomic, strong) UIImage *mosaicableImage;
+@property (nonatomic, strong) UIImage *mosaicImage;
 
 @property (nonatomic, strong) UIPanGestureRecognizer *pan;
 
@@ -46,7 +46,7 @@
 }
 
 - (UIImage *)mosaicImage {
-    return [self mosaicImageAtLevel:LCMosaicLevelDefault];
+    return (self.mosaicImage) ? self.mosaicImage : [self mosaicImageAtLevel:LCMosaicLevelDefault];
 }
 
 - (UIImage *)mosaicImageAtLevel:(LCMosaicLevel)level {
@@ -122,7 +122,7 @@
 
 - (void)setup {
     self.compressedImage = [self captureScreen];
-    self.mosaicableImage = [self mosaicImageAtLevel:self.mosaicLevel];
+    self.mosaicImage = [self mosaicImageAtLevel:self.mosaicLevel];
 }
 
 - (void)saveImage {
@@ -149,9 +149,9 @@
                                  (double)self.strokeScale * scalar);
     
     UIImage *clipImage = [UIImage imageWithCGImage:
-                          CGImageCreateWithImageInRect([self.mosaicableImage CGImage],clipArea)
+                          CGImageCreateWithImageInRect([self.mosaicImage CGImage],clipArea)
                                     scale:self.originalImage.scale
-                                    orientation:self.mosaicableImage.imageOrientation];
+                                    orientation:self.mosaicImage.imageOrientation];
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:clipImage];
     imageView.frame = CGRectMake(0, 0, (double)self.strokeScale, (double)self.strokeScale);
