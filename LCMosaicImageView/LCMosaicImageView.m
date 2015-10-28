@@ -54,11 +54,13 @@
     
     CGImageRef imageRef = CGImageCreateWithImageInRect([self.originalImage CGImage],
                             CGRectMake(0, 0,
-                                self.originalImage.size.width, self.originalImage.size.height));
+                                self.originalImage.size.width * self.originalImage.scale, self.originalImage.size.height * self.originalImage.scale));
     UIImage * newImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:self.image.imageOrientation];
     UIImage *mosaicImage = [self mosaicImage:newImage inLevel:level];
     CGImageRelease(imageRef);
-    return [self imageWithImage:mosaicImage convertToSize:CGSizeMake(self.frame.size.width * 2, self.frame.size.height * 2)];
+    NSInteger ratio = [UIScreen mainScreen].scale / self.originalImage.scale;
+
+    return [self imageWithImage:mosaicImage convertToSize:CGSizeMake(self.frame.size.width * ratio, self.frame.size.height * ratio)];
 }
 
 #pragma mark - class method
@@ -142,7 +144,7 @@
 
 - (void)mosaicImageInPoint:(CGPoint)point {
     point = [self transformPoint:point];
-    CGFloat scalar = [UIScreen mainScreen].scale;
+    CGFloat scalar = [UIScreen mainScreen].scale / self.originalImage.scale;
     CGRect clipArea = CGRectMake((point.x - (double)self.strokeScale / 2.0f) * scalar,
                                  (point.y - (double)self.strokeScale / 2.0f) * scalar,
                                  (double)self.strokeScale * scalar,
