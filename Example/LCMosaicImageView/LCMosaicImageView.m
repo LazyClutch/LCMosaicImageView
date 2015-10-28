@@ -71,18 +71,9 @@
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan {
     CGPoint point = [pan locationInView:self];
-    if (pan.state == UIGestureRecognizerStateBegan) {
-        [self saveImage];
-        if ([self.delegate respondsToSelector:@selector(imageViewWillMosaicImage:)]) {
-            [self.delegate imageViewWillMosaicImage:self];
-        }
+    if (pan.state == UIGestureRecognizerStateChanged) {
         [self mosaicImageInPoint:point];
-        if ([self.delegate respondsToSelector:@selector(imageViewDidMosaicImage:)]) {
-            [self.delegate imageViewDidMosaicImage:self];
-        }
-    } else if (pan.state == UIGestureRecognizerStateChanged) {
-        [self mosaicImageInPoint:point];
-    } else {
+    } else if (pan.state == UIGestureRecognizerStateEnded) {
         if ([self.delegate respondsToSelector:@selector(imageViewWillFinishMosaicImage:)]) {
             [self.delegate imageViewWillFinishMosaicImage:self];
         }
@@ -90,6 +81,29 @@
         if ([self.delegate respondsToSelector:@selector(imageViewDidFinishMosaicImage:)]) {
             [self.delegate imageViewDidFinishMosaicImage:self];
         }
+    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self];
+    [self saveImage];
+    if ([self.delegate respondsToSelector:@selector(imageViewWillMosaicImage:)]) {
+        [self.delegate imageViewWillMosaicImage:self];
+    }
+    [self mosaicImageInPoint:point];
+    if ([self.delegate respondsToSelector:@selector(imageViewDidMosaicImage:)]) {
+        [self.delegate imageViewDidMosaicImage:self];
+    }
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([self.delegate respondsToSelector:@selector(imageViewWillFinishMosaicImage:)]) {
+        [self.delegate imageViewWillFinishMosaicImage:self];
+    }
+    [self saveImage];
+    if ([self.delegate respondsToSelector:@selector(imageViewDidFinishMosaicImage:)]) {
+        [self.delegate imageViewDidFinishMosaicImage:self];
     }
 }
 
