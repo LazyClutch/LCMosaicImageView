@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) UIImage *originalImage;
 @property (nonatomic, strong) UIImage *compressedImage;
-@property (nonatomic, strong) UIImage *mosaicImage;
+@property (nonatomic, strong) UIImage *mosaicableImage;
 
 @property (nonatomic, strong) UIPanGestureRecognizer *pan;
 
@@ -29,8 +29,13 @@
         _originalImage = image;
         _mosaicLevel = LCMosaicLevelDefault;
         _strokeScale = LCStrokeScaleDefault;
+        [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"frame"];
 }
 
 #pragma mark - api
@@ -53,7 +58,7 @@
     UIImage * newImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:self.image.imageOrientation];
     UIImage *mosaicImage = [self mosaicImage:newImage inLevel:level];
     CGImageRelease(imageRef);
-    return mosaicImage;
+    return [self imageWithImage:mosaicImage convertToSize:CGSizeMake(self.frame.size.width * 2, self.frame.size.height * 2)];
 }
 
 #pragma mark - class method
@@ -107,11 +112,17 @@
     }
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"frame"]) {
+        [self setup];
+    }
+}
+
 #pragma mark - private
 
 - (void)setup {
     self.compressedImage = [self captureScreen];
-    self.mosaicImage = [self mosaicImageAtLevel:self.mosaicLevel];
+    self.mosaicableImage = [self mosaicImageAtLevel:self.mosaicLevel];
 }
 
 - (void)saveImage {
@@ -138,9 +149,9 @@
                                  (double)self.strokeScale * scalar);
     
     UIImage *clipImage = [UIImage imageWithCGImage:
-                          CGImageCreateWithImageInRect([self.mosaicImage CGImage],clipArea)
+                          CGImageCreateWithImageInRect([self.mosaicableImage CGImage],clipArea)
                                     scale:self.originalImage.scale
-                                    orientation:self.mosaicImage.imageOrientation];
+                                    orientation:self.mosaicableImage.imageOrientation];
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:clipImage];
     imageView.frame = CGRectMake(0, 0, (double)self.strokeScale, (double)self.strokeScale);
@@ -196,6 +207,14 @@
     CGFloat x = (CGFloat)((NSInteger)point.x - (NSInteger)point.x % 2);
     CGFloat y = (CGFloat)((NSInteger)point.y - (NSInteger)point.y % 2);
     return CGPointMake(x, y);
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return destImage;
 }
 
 #pragma mark - setter & getter
