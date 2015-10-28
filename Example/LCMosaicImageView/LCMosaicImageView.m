@@ -46,7 +46,7 @@
 }
 
 - (UIImage *)mosaicImage {
-    return (self.mosaicImage) ? self.mosaicImage : [self mosaicImageAtLevel:LCMosaicLevelDefault];
+    return (_mosaicImage) ? _mosaicImage : [self mosaicImageAtLevel:LCMosaicLevelDefault];
 }
 
 - (UIImage *)mosaicImageAtLevel:(LCMosaicLevel)level {
