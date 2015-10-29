@@ -26,7 +26,8 @@
 - (instancetype)initWithImage:(UIImage *)image {
     self = [super initWithImage:image];
     if (self) {
-        _originalImage = image;
+        UIImage *imageNoRotate = [self removeRotationForImage:image];
+        _originalImage = imageNoRotate;
         _mosaicLevel = LCMosaicLevelDefault;
         _strokeScale = LCStrokeScaleDefault;
         [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
@@ -219,6 +220,18 @@
     return destImage;
 }
 
+- (UIImage *)removeRotationForImage:(UIImage*)image {
+    if (image.imageOrientation == UIImageOrientationUp) {
+        return image;
+    }
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    UIImage *imageNoRotation =  UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return imageNoRotation;
+}
+
+
 #pragma mark - setter & getter
 
 - (void)setMosaicEnabled:(BOOL)mosaicEnabled {
@@ -235,10 +248,11 @@
 }
 
 - (void)setImage:(UIImage *)image {
-    [super setImage:image];
+    UIImage *imageNoRotate = [self removeRotationForImage:image];
+    [super setImage:imageNoRotate];
     _mosaicLevel = (_mosaicLevel != 0) ? _mosaicLevel : LCMosaicLevelDefault;
     _strokeScale = (_strokeScale != 0) ? _strokeScale : LCStrokeScaleDefault;
-    _originalImage = (_originalImage) ? _originalImage : image;
+    _originalImage = (_originalImage) ? _originalImage : imageNoRotate;
 }
 
 - (UIPanGestureRecognizer *)pan {
