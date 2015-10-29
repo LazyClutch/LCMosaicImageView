@@ -53,9 +53,9 @@
 - (UIImage *)mosaicImageAtLevel:(LCMosaicLevel)level {
     self.mosaicLevel = level;
     
-    CGImageRef imageRef = CGImageCreateWithImageInRect([self.originalImage CGImage],
+    CGImageRef imageRef = CGImageCreateWithImageInRect([self.compressedImage CGImage],
                             CGRectMake(0, 0,
-                                self.originalImage.size.width * self.originalImage.scale, self.originalImage.size.height * self.originalImage.scale));
+                                self.compressedImage.size.width * self.compressedImage.scale, self.compressedImage.size.height * self.compressedImage.scale));
     UIImage * newImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:self.image.imageOrientation];
     UIImage *mosaicImage = [self mosaicImage:newImage inLevel:level];
     CGImageRelease(imageRef);
@@ -124,8 +124,14 @@
 #pragma mark - private
 
 - (void)setup {
+    self.backgroundColor = [UIColor whiteColor];
     self.compressedImage = [self captureScreen];
-    self.mosaicImage = [self mosaicImageAtLevel:self.mosaicLevel];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
+        __block UIImage *image = [self mosaicImageAtLevel:self.mosaicLevel];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            self.mosaicImage = image;
+        });
+    });
 }
 
 - (void)saveImage {
@@ -134,7 +140,7 @@
 
 - (UIImage *)captureScreen {
     UIImage* image = nil;
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.frame.size.width, self.frame.size.height), self.opaque, 0.0);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.frame.size.width, self.frame.size.height), NO, 0.0);
     [self.layer renderInContext: UIGraphicsGetCurrentContext()];
     image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -162,13 +168,13 @@
     [self addSubview:imageView];
 }
 
-- (UIImage *)mosaicImage:(UIImage *)image inLevel:(LCMosaicLevel)level {
+- (UIImage *)mosaicImage:(UIImage *)image inLevel:(LCMosaicLevel)mosaicLevel {
     CGImageRef imageRef = [image CGImage];
     NSUInteger width = CGImageGetWidth(imageRef);
     NSUInteger height = CGImageGetHeight(imageRef);
     NSUInteger maxOffset = height * width * 4;
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    
+    NSInteger level = mosaicLevel * [UIScreen mainScreen].scale;
     unsigned char *rawData = (unsigned char *) calloc(maxOffset, sizeof(unsigned char));
     NSUInteger bytesPerPixel = 4;
     NSUInteger bytesPerRow = bytesPerPixel * width;
