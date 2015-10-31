@@ -20,7 +20,7 @@ LCMosaicImageView is an image view which enables you to add mosaic effect on ima
 
 <img src="http://7xl7ci.com1.z0.glb.clouddn.com/lcmosaicview_reset.gif" alt="reset" title="reset" />
 
-#### Get a while mosaic image
+#### Get a whole mosaic image
 
 <img src="http://7xl7ci.com1.z0.glb.clouddn.com/lcmosaicview_oneclick.gif" alt="oneclick" title="oneclick" />
 
