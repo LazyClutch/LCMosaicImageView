@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6342225F1BF9AD4100074140 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6342225E1BF9AD4100074140 /* 1.jpg */; };
 		6360C7C21BDA0D570075C44D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6360C7C11BDA0D570075C44D /* main.m */; };
 		6360C7C51BDA0D570075C44D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6360C7C41BDA0D570075C44D /* AppDelegate.m */; };
 		6360C7C81BDA0D570075C44D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6360C7C71BDA0D570075C44D /* ViewController.m */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6342225E1BF9AD4100074140 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		6360C7BD1BDA0D570075C44D /* LCMosaicImageView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LCMosaicImageView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6360C7C11BDA0D570075C44D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6360C7C31BDA0D570075C44D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		6360C7C01BDA0D570075C44D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6342225E1BF9AD4100074140 /* 1.jpg */,
 				63C438C51BDD066100261FFC /* sample.png */,
 				6360C7C11BDA0D570075C44D /* main.m */,
 			);
@@ -263,6 +266,7 @@
 				6360C7CD1BDA0D570075C44D /* Assets.xcassets in Resources */,
 				6360C7CB1BDA0D570075C44D /* Main.storyboard in Resources */,
 				63C438C61BDD066100261FFC /* sample.png in Resources */,
+				6342225F1BF9AD4100074140 /* 1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
