@@ -28,6 +28,10 @@
     self.resetButton.hidden = YES;
     self.saveButton.hidden = YES;
     
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    self.imageView.frame = CGRectMake(0, 0, screenSize.width, 500);
+    self.imageView.image = [UIImage imageNamed:@"1.jpg"];
+    
     [self.view addSubview:self.imageView];
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -100,7 +104,7 @@
 
 - (LCMosaicImageView *)imageView {
     if (!_imageView) {
-        _imageView = [[LCMosaicImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
+        _imageView = [[LCMosaicImageView alloc] init];
         _imageView.center = self.view.center;
         _imageView.strokeScale = LCStrokeScaleLarge;
         _imageView.delegate = self;

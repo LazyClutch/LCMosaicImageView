@@ -130,6 +130,7 @@
         __block UIImage *image = [self mosaicImageAtLevel:self.mosaicLevel];
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             self.mosaicImage = image;
+            self.image = self.compressedImage;
         });
     });
 }

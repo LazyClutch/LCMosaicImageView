@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -60,13 +60,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7Eq-Dm-JEe" secondAttribute="bottom" constant="8" id="107-vF-ceH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7Eq-Dm-JEe" secondAttribute="trailing" constant="-3" id="1s1-tG-x3B"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EbN-0h-0sB" secondAttribute="bottom" constant="8" id="JaW-b2-fmw"/>
                             <constraint firstItem="9Ax-Wl-bXy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="L3i-vK-jcH"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9Ax-Wl-bXy" secondAttribute="bottom" constant="8" id="QyB-Wa-IWt"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7Eq-Dm-JEe" secondAttribute="bottom" constant="8" id="b4m-yV-Zzi"/>
                             <constraint firstItem="EbN-0h-0sB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="e8f-pt-mp7"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9Ax-Wl-bXy" secondAttribute="bottom" constant="8" id="f74-RV-U36"/>
                             <constraint firstItem="5b7-D9-EAW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-1" id="g0w-pB-0tr"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EbN-0h-0sB" secondAttribute="bottom" constant="8" id="qxQ-6h-5c1"/>
                             <constraint firstItem="EbN-0h-0sB" firstAttribute="top" secondItem="5b7-D9-EAW" secondAttribute="bottom" constant="30" id="qyH-4I-G6u"/>
                         </constraints>
                     </view>
