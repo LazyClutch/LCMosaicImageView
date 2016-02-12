@@ -36,7 +36,7 @@ LCMosaicImageView is an image view which enables you to add mosaic effect on ima
 
 ### Installation
 
-You can either use Cocoapods, adding `pod 'LCMosaicImageView'` in your podfile, or directly add `LCMosaicImageView.h` and `LCMosaicImageView.m` to your project.
+You can either use CocoaPods, adding `pod 'LCMosaicImageView'` in your podfile, or directly add `LCMosaicImageView.h` and `LCMosaicImageView.m` to your project.
 
 ### Usage
 
