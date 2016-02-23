@@ -23,7 +23,7 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad]; 
     
     self.resetButton.hidden = YES;
     self.saveButton.hidden = YES;
