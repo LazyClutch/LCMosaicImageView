@@ -267,6 +267,7 @@
 				6334C9B31D50AAC400EB4773 /* 1.JPG in Resources */,
 				6360C7CB1BDA0D570075C44D /* Main.storyboard in Resources */,
 				63C438C61BDD066100261FFC /* sample.png in Resources */,
+				6342225F1BF9AD4100074140 /* 1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
