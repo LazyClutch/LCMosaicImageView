@@ -78,7 +78,7 @@
     
     self.imageView.mosaicEnabled = YES;
 
-    UIImage *image = [self.imageView mosaicImageAtLevel:LCMosaicLevelVeryHigh];
+    UIImage *image = [self.imageView mosaicImageAtLevel:LCMosaicLevelLow];
     self.imageView.image = image;
 }
 
@@ -106,7 +106,8 @@
     if (!_imageView) {
         _imageView = [[LCMosaicImageView alloc] init];
         _imageView.center = self.view.center;
-        _imageView.strokeScale = LCStrokeScaleLarge;
+        _imageView.strokeScale = LCStrokeScaleMedium;
+        _imageView.mosaicLevel = LCMosaicLevelDefault;
         _imageView.delegate = self;
     }
     return _imageView;
