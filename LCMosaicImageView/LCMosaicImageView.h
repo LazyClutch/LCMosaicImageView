@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, LCStrokeScale) {
 
 @end
 
+
 @interface LCMosaicImageView : UIImageView
 
 - (instancetype)initWithImage:(UIImage *)image;
